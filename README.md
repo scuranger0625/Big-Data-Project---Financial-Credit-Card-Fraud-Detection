@@ -1,132 +1,35 @@
-# Credit Card Fraud Detection with XGBoost
+# 大數據分析期末報告
 
-## Introduction (簡介)
-This project demonstrates the detection of fraudulent credit card transactions using the XGBoost algorithm. The dataset contains transactions labeled as fraudulent (`Class = 1`) or non-fraudulent (`Class = 0`), with features derived through Principal Component Analysis (PCA). The primary goal is to classify transactions and evaluate the performance of the model.
+## 簡介
+本專案旨在利用大數據分析技術，針對信用卡詐欺檢測進行模型構建與特徵優化。
+研究方法包括 SVM、XGBoost，以及基於 XGBoost 的特徵重要性結合貪婪算法的特徵選擇策略。
+此專案旨在探索提升模型性能的可能性，並比較不同方法在處理不平衡數據上的效果。
 
-本項目使用 XGBoost 演算法檢測信用卡交易中的詐欺行為。數據集包含標記為詐欺（`Class = 1`）或非詐欺（`Class = 0`）的交易，特徵經主成分分析（PCA）處理後生成。本項目的主要目的是分類交易並評估模型性能。
+## 專案結構
+此專案包含以下主要部分：
+- **數據讀取與前處理**：處理信用卡交易數據集，應用標準化與特徵組合。
+- **模型構建與特徵選擇**：基於 SVM 和 XGBoost 進行基礎建模，並使用三種貪婪算法（貪婪算法、Dijkstra、Prim）進行特徵篩選。
+- **結果分析與比較**：對不同算法的性能進行評估，包括 AUC-ROC、混淆矩陣及分類報告。
 
----
+## 技術細節
+本專案的主要技術細節如下：
+- **數據來源**：信用卡詐欺檢測公開數據集。
+- **算法應用**：
+  - SVM (支持向量機)：適用於高維數據和不平衡場景。
+  - XGBoost：利用特徵重要性進行特徵篩選，並進行初步模型構建。
+  - 貪婪算法、Dijkstra、Prim：基於 XGBoost 特徵重要性，進一步優化特徵選擇。
+- **評估指標**：AUC-ROC、精確率 (Precision)、召回率 (Recall)、F1-score。
 
-## Features (特徵)
-1. **Time (時間)**: Seconds elapsed between the transaction and the first transaction in the dataset.
-2. **Amount (金額)**: The transaction amount.
-3. **V1 to V28 (特徵 V1 到 V28)**: Features resulting from PCA transformation.
+## 文件內容
+此 Jupyter Notebook 包含以下內容：
 
-1. **Time (時間)**: 與數據集中第一筆交易之間的秒數差。
-2. **Amount (金額)**: 交易金額。
-3. **V1 至 V28 (特徵 V1 到 V28)**: 經 PCA 轉換生成的特徵。
+## 使用方法
+1. 確保已安裝必要的 Python 庫，包括 `pandas`、`numpy`、`xgboost`、`matplotlib`、`seaborn` 和 `scikit-learn`。
+2. 下載數據集並放置於適當目錄中。
+3. 運行 Notebook 以復現結果。
 
----
+## 結果展示
+分析結果包括混淆矩陣、特徵重要性排序及模型性能比較，詳細內容見 Notebook。
 
-## Steps (步驟)
-1. **Data Loading (數據加載)**:
-   - Load and preprocess the dataset.
-   - Convert the labels into binary form (`Class = 1` for fraud, `Class = 0` for non-fraud).
-
-2. **Feature Engineering (特徵工程)**:
-   - Assemble features for modeling.
-   - Normalize and split the data into training and test sets.
-
-3. **Modeling (建模)**:
-   - Train the XGBoost classifier.
-   - Evaluate performance using confusion matrix, classification report, and AUC-ROC score.
-
-4. **Feature Importance Analysis (特徵重要性分析)**:
-   - Visualize the most important features using XGBoost's built-in functionality.
-
-1. **數據加載**:
-   - 加載並預處理數據集。
-   - 將標籤轉換為二進制格式（詐欺：`Class = 1`，非詐欺：`Class = 0`）。
-
-2. **特徵工程**:
-   - 組合特徵用於建模。
-   - 正規化並將數據分為訓練集和測試集。
-
-3. **建模**:
-   - 訓練 XGBoost 分類器。
-   - 使用混淆矩陣、分類報告和 AUC-ROC 分數評估性能。
-
-4. **特徵重要性分析**:
-   - 使用 XGBoost 內建功能可視化重要特徵。
-
----
-
-## Performance Metrics (性能指標)
-- **Confusion Matrix (混淆矩陣)**:
-  - Shows the number of correct and incorrect classifications for both fraud and non-fraud transactions.
-
-- **Classification Report (分類報告)**:
-  - Includes Precision, Recall, and F1-score for each class.
-
-- **AUC-ROC Score (AUC-ROC 分數)**:
-  - Measures the model's ability to distinguish between classes.
-
-- **混淆矩陣**:
-  - 顯示詐欺和非詐欺交易的正確與錯誤分類數量。
-
-- **分類報告**:
-  - 包含每個類別的 Precision（精確率）、Recall（召回率）和 F1-score（F1 分數）。
-
-- **AUC-ROC 分數**:
-  - 測量模型區分類別的能力。
-
----
-
-## Requirements (需求)
-- Python 3.x
-- PySpark
-- XGBoost
-- Pandas
-- Matplotlib
-- scikit-learn
-
----
-
-## How to Run (運行方法)
-1. Clone this repository.
-   ```bash
-   git clone <repository_url>
-   cd <repository_folder>
-   ```
-
-2. Install dependencies.
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Run the script.
-   ```bash
-   python svm_credit_fraud.py
-   ```
-
-1. 克隆此倉庫。
-   ```bash
-   git clone <repository_url>
-   cd <repository_folder>
-   ```
-
-2. 安裝依賴項。
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. 運行腳本。
-   ```bash
-   python svm_credit_fraud.py
-   ```
-
----
-
-## Results (結果)
-- Achieved an AUC-ROC score of **0.9743** with XGBoost.
-- High precision and recall for detecting fraudulent transactions.
-
-- 使用 XGBoost 達到 **0.9743** 的 AUC-ROC 分數。
-- 在檢測詐欺交易方面具有高精確率和召回率。
-
----
-
-## License (許可證)
-This project is licensed under the MIT License.
-
-本項目基於 MIT 許可證發佈。
+## 聲明
+本專案僅用於學術研究與教學目的。
